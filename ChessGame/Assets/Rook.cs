@@ -4,9 +4,12 @@ using UnityEngine;
 using System;
 public class Rook : MonoBehaviour
 {
+    King king = new King();
+    KingCheck kings = new KingCheck();
     public bool hasMoved = false;
-    GetPosition get = new GetPosition();
+    CheckOcc get = new CheckOcc();
     GetCords cords = new GetCords();
+    
    public bool CanMove(double position, GameObject piece)
     {
         var (x, y) = cords.GetCord(position);
@@ -29,8 +32,20 @@ public class Rook : MonoBehaviour
                     {
                         if (i == y)
                         {
-                            Destroy(get.d.des);
-                            return true;
+                            double tx = get.d.des.GetComponent<Piece>().x;
+                            double ty = get.d.des.GetComponent<Piece>().y;
+                            get.d.des.GetComponent<Piece>().x = -1;
+                             get.d.des.GetComponent<Piece>().y = -1;
+                            if (!kings.inCheck(x, i, piece)){
+                                Destroy(get.d.des);
+                                return true; // Returns false because that means it can't move
+                            }
+                            else{
+                                get.d.des.GetComponent<Piece>().x = tx;
+                                get.d.des.GetComponent<Piece>().y = ty;
+                    
+                            return false;
+                            }
                         }
                         else return false;
 
@@ -39,7 +54,7 @@ public class Rook : MonoBehaviour
                     {
                         return false;
                     }
-                    else if (i == y)
+                    else if (i == y && !kings.inCheck(x, i, piece))
                     {
                         return true;
                     }
@@ -52,10 +67,22 @@ public class Rook : MonoBehaviour
                     var(canMove, oppColor) = get.isOccupied(x, i, piece);
                     if (canMove && oppColor)
                     {
-                        if (i == y)
+                        if (i == y )
                         {
-                            Destroy(get.d.des);
-                            return true;
+                            double tx = get.d.des.GetComponent<Piece>().x;
+                            double ty = get.d.des.GetComponent<Piece>().y;
+                            get.d.des.GetComponent<Piece>().x = -1;
+                             get.d.des.GetComponent<Piece>().y = -1;
+                            if (!kings.inCheck(x, i, piece)){
+                                Destroy(get.d.des);
+                                return true; // Returns false because that means it can't move
+                            }
+                            else{
+                                get.d.des.GetComponent<Piece>().x = tx;
+                                get.d.des.GetComponent<Piece>().y = ty;
+                    
+                            return false;
+                            }
                         }
                         else return false;
 
@@ -65,7 +92,7 @@ public class Rook : MonoBehaviour
                         return false;
                     }
                      
-                    else if (i == y)
+                    else if (i == y && !kings.inCheck(x, i, piece))
                     {
                         return true;
                     }
@@ -90,8 +117,22 @@ public class Rook : MonoBehaviour
                     {
                         if (i == x)
                         {
-                            Destroy(get.d.des);
-                            return true;
+                            
+                            double tx = get.d.des.GetComponent<Piece>().x;
+                            double ty = get.d.des.GetComponent<Piece>().y;
+                            get.d.des.GetComponent<Piece>().x = -1;
+                             get.d.des.GetComponent<Piece>().y = -1;
+                            if (!kings.inCheck(i, y, piece)){
+                                Destroy(get.d.des);
+                                return true; // Returns false because that means it can't move
+                            }
+                            else{
+                                get.d.des.GetComponent<Piece>().x = tx;
+                                get.d.des.GetComponent<Piece>().y = ty;
+                    
+                            return false;
+                            }
+                        
                         }
                         else return false;
 
@@ -100,7 +141,7 @@ public class Rook : MonoBehaviour
                     {
                         return false;
                     }
-                    else if (i == x)
+                    else if (i == x && !kings.inCheck(i, y, piece))
                     {
                         return true;
                     }
@@ -117,8 +158,20 @@ public class Rook : MonoBehaviour
                     {
                         if (i == x)
                         {
-                            Destroy(get.d.des);
-                            return true;
+                            double tx = get.d.des.GetComponent<Piece>().x;
+                            double ty = get.d.des.GetComponent<Piece>().y;
+                            get.d.des.GetComponent<Piece>().x = -1;
+                             get.d.des.GetComponent<Piece>().y = -1;
+                            if (!kings.inCheck(i, y, piece)){
+                                Destroy(get.d.des);
+                                return true; // Returns false because that means it can't move
+                            }
+                            else{
+                                get.d.des.GetComponent<Piece>().x = tx;
+                                get.d.des.GetComponent<Piece>().y = ty;
+                    
+                            return false;
+                            }
                         }
                         else return false;
 
@@ -127,7 +180,7 @@ public class Rook : MonoBehaviour
                     {
                         return false;
                     }
-                    else if (i == x)
+                    else if (i == x && !kings.inCheck(i, y, piece))
                     {
                         return true;
                     }

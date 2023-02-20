@@ -8,6 +8,7 @@ public class Piece : MonoBehaviour
     public bool isBlack;
 
     public double x, y;
+    
     public GameObject[] square;
     public bool SetInfo(double position, GameObject piece) // Updates the cords of the piece that just moved
     {

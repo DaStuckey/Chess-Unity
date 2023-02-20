@@ -3,16 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
+public class GameManager {
+    public static bool bTurn = false;
+}
+
 public class Dragger : MonoBehaviour
 {
+    //bool bTurn = false;
+    CheckOcc get = new CheckOcc();
     public GameObject piece; // This GameObject is used to let me know what Piece I am currently trying to move 
     //Rook rook = new Rook();
     //Queen queen = new Queen();
     bool canMove = false; // These bools help me with my drag and drop 
     bool isDraggable; 
     bool isDragging; 
-
-    Piece newPiece = new Piece(); // To help me call my classes 
+    Pawn pawn = new Pawn();
+    KingCheck c = new KingCheck();
+   Piece newPiece = new Piece(); // To help me call my classes 
     
     //Bishop bishop = new Bishop();
 
@@ -21,7 +28,14 @@ public class Dragger : MonoBehaviour
     public Vector2 position; // This is used to store the last know position so that way if a move is not valid 
     bool worked = false;
 
-    // Start is called before the first frame update
+    bool SomeMethod(bool changing) {
+        // Access and modify the bTurn variable
+        bool currentTurn = GameManager.bTurn;
+        if(changing){
+        GameManager.bTurn = !currentTurn;
+        }
+        return currentTurn;
+    }
     void Start()
     {
         
@@ -29,7 +43,7 @@ public class Dragger : MonoBehaviour
         isDraggable = false;
         isDragging = false;
         newPiece.SetCords();
-
+        
 
     }
     
@@ -49,6 +63,7 @@ public class Dragger : MonoBehaviour
    
     void DragAndDrop() // This Method creates the drag and drop functinality of my game
     {
+        
         worked = false; // this is how I know if my move was legal or if I should send it back to it's default position 
         Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
@@ -78,6 +93,7 @@ public class Dragger : MonoBehaviour
         if (isDragging)
         {
             this.transform.position = mousePosition; // Sets position to the mouse positoin
+            
         }
 
         if (Input.GetMouseButtonUp(0)) // When I let go of the piece
@@ -85,6 +101,7 @@ public class Dragger : MonoBehaviour
             
             if (isDragging) //Makes sure I was dragging a piece as to not run the code every time I click my mouse
             {
+                
             for (int i = 0; i < GetPosition.prefabPositions.Count; i++) // Checks squares positoin (from my board) 
                 {
                     
@@ -95,11 +112,15 @@ public class Dragger : MonoBehaviour
                     Collider2D targetObject = Physics2D.OverlapPoint(mousePosition);// sets a Collider then checks if I am colliding with anything when I let go
                     if (targetObject)
                     {
+                        bool changing = false;
+                        bool changings = true;
                         
                         if (objectCollider == Physics2D.OverlapPoint(GetPosition.prefabPositions[i]))
                         {
-                            double b = Convert.ToDouble(i); 
-
+                            Debug.Log(piece.GetComponent<Piece>().isBlack == SomeMethod(changing));
+                            if(piece.GetComponent<Piece>().isBlack == SomeMethod(changing)){
+                            double b = Convert.ToDouble(i);
+                            
                             Knight knightScript = targetObject.GetComponent<Knight>();
                             if (knightScript != null)
                             {
@@ -114,6 +135,12 @@ public class Dragger : MonoBehaviour
                                     Debug.Log("Hiioioioioi");
                                     piece.GetComponent<Rook>().hasMoved = true;
                                 }
+                            }
+                            Pawn pawnScript = targetObject.GetComponent<Pawn>();
+                             if (pawnScript != null)
+                            {
+                                canMove = pawnScript.CanMove(b, piece);
+                                
                             }
                             King kingScript = targetObject.GetComponent<King>();
                             if (kingScript != null)
@@ -148,7 +175,7 @@ public class Dragger : MonoBehaviour
                             }
                             if (canMove)
                             {
-                                
+                                bool l = SomeMethod(changings);
                                 newPiece.SetInfo(b, piece);
                                 piece = null;
                                 Vector2 dropPosition = GetPosition.prefabPositions[i];
@@ -161,8 +188,9 @@ public class Dragger : MonoBehaviour
                                
                                 
                                 
-                               
+                            
 
+                            }
                             }
                         }
 

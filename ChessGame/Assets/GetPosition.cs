@@ -5,12 +5,16 @@ using UnityEngine;
 
 public class GetPosition : MonoBehaviour
 {
+    
+    
+    
     void Start()
     {
         Test();
+       
     }
     Piece newPiece = new Piece();
-    public Destroy d = new Destroy();
+    
     public double x , y;
     public GameObject objects;
     public  Vector2 position2;
@@ -43,70 +47,7 @@ public class GetPosition : MonoBehaviour
     }
 
   
-    public (bool, bool) isOccupied(double a, double b, GameObject piece)
-    {
-        GameObject[] prefabInstances = GameObject.FindGameObjectsWithTag("Piece");
-        
-        int i = 0;
-        foreach (GameObject prefab in prefabInstances)
-        {
-            //Debug.Log("Array Contains: " + prefab.name);
-            Piece script = prefab.GetComponent<Piece>();
-            //Debug.Log(script.x + " : " + a + " : " + script.y + " : " + b);
-            if (script.x == a && script.y == b)
-            {
-                 
-               
-                if (piece.GetComponent<Piece>().isBlack == script.GetComponent<Piece>().isBlack)
-                {
-                    King kingScript = piece.GetComponent<King>();
-                    if (kingScript != null)
-                    {
-
-                        if (piece.GetComponent<King>().checkCounter == 0)
-                        {
-
-                            return (false, false);
-                        }
-                        else return (true, false);
-                    }
-                    else return (false, false);
-                }
-                else
-                {
-                    King kingScript = piece.GetComponent<King>();
-                    if (kingScript != null)
-                    {
-
-                        if (piece.GetComponent<King>().checkCounter == 0)
-                        {
-                            Destroy be = new Destroy();
-                            be.des = prefabInstances[i];
-                            this.d = be;
-                            return (true, true);
-                        }
-                        else if (piece.GetComponent<King>().checkCounter == 1)
-                        {
-                            Knight knightScript = prefab.GetComponent<Knight>();
-                            if (knightScript != null)
-                            {
-                                return (false, false);
-                            }
-                        }
-                    }
-                    else
-                    {
-                        Destroy be = new Destroy();
-                        be.des = prefabInstances[i];
-                        this.d = be;
-                        return (true, true);
-                    }
-                }
-            }
-            i++;
-        }
-        return (true, false);
-    }
+    
 
     
 

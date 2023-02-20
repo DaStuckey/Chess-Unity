@@ -5,7 +5,8 @@ using System;
 
 public class Bishop : MonoBehaviour
 {
-    GetPosition get = new GetPosition();
+    CheckOcc get = new CheckOcc();
+    KingCheck kings = new KingCheck();
     GetCords cords = new GetCords();
     public bool CanMove(double position, GameObject piece)
     {
@@ -30,8 +31,20 @@ public class Bishop : MonoBehaviour
                     {
                         if (i == x)
                         {
-                            Destroy(get.d.des);
-                            return true;
+                            double tx = get.d.des.GetComponent<Piece>().x;
+                double ty = get.d.des.GetComponent<Piece>().y;
+                get.d.des.GetComponent<Piece>().x = -1;
+                get.d.des.GetComponent<Piece>().y = -1;
+                if (!kings.inCheck(i, e, piece)){
+                    Destroy(get.d.des);
+                    return true; // Returns false because that means it can't move
+                }
+                else{
+                    get.d.des.GetComponent<Piece>().x = tx;
+                    get.d.des.GetComponent<Piece>().y = ty;
+                    
+                    return false;
+                }
                         }
                         else return false;
 
@@ -40,7 +53,7 @@ public class Bishop : MonoBehaviour
                     {
                         return false;
                     }
-                   if (i == x)
+                   if (i == x && !kings.inCheck(i, e, piece))
                     {
                         return true;
                     }
@@ -60,8 +73,20 @@ public class Bishop : MonoBehaviour
                     {
                         if (i == x)
                         {
-                            Destroy(get.d.des);
-                            return true;
+                            double tx = get.d.des.GetComponent<Piece>().x;
+                double ty = get.d.des.GetComponent<Piece>().y;
+                get.d.des.GetComponent<Piece>().x = -1;
+                get.d.des.GetComponent<Piece>().y = -1;
+                if (!kings.inCheck(i, e, piece)){
+                    Destroy(get.d.des);
+                    return true; // Returns false because that means it can't move
+                }
+                else{
+                    get.d.des.GetComponent<Piece>().x = tx;
+                    get.d.des.GetComponent<Piece>().y = ty;
+                    
+                    return false;
+                }
                         }
                         else return false;
 
@@ -70,7 +95,7 @@ public class Bishop : MonoBehaviour
                     {
                         return false;
                     }
-                    else if (i == x)
+                    else if (i == x && !kings.inCheck(i, e, piece))
                     {
                         return true;
                     }
@@ -88,8 +113,20 @@ public class Bishop : MonoBehaviour
                     {
                         if (i == x)
                         {
-                            Destroy(get.d.des);
-                            return true;
+                            double tx = get.d.des.GetComponent<Piece>().x;
+                double ty = get.d.des.GetComponent<Piece>().y;
+                get.d.des.GetComponent<Piece>().x = -1;
+                get.d.des.GetComponent<Piece>().y = -1;
+                if (!kings.inCheck(i, e, piece)){
+                    Destroy(get.d.des);
+                    return true; // Returns false because that means it can't move
+                }
+                else{
+                    get.d.des.GetComponent<Piece>().x = tx;
+                    get.d.des.GetComponent<Piece>().y = ty;
+                    
+                    return false;
+                }
                         }
                         else return false;
 
@@ -98,7 +135,7 @@ public class Bishop : MonoBehaviour
                     {
                         return false;
                     }
-                    else if (i == x)
+                    else if (i == x && !kings.inCheck(i, e, piece))
                     {
                         return true;
                     }
@@ -118,8 +155,20 @@ public class Bishop : MonoBehaviour
                     {
                         if (i == x)
                         {
-                            Destroy(get.d.des);
-                            return true;
+                             double tx = get.d.des.GetComponent<Piece>().x;
+                double ty = get.d.des.GetComponent<Piece>().y;
+                get.d.des.GetComponent<Piece>().x = -1;
+                get.d.des.GetComponent<Piece>().y = -1;
+                if (!kings.inCheck(i, e, piece)){
+                    Destroy(get.d.des);
+                    return true; // Returns false because that means it can't move
+                }
+                else{
+                    get.d.des.GetComponent<Piece>().x = tx;
+                    get.d.des.GetComponent<Piece>().y = ty;
+                    
+                    return false;
+                }
                         }
                         else return false;
 
@@ -128,7 +177,7 @@ public class Bishop : MonoBehaviour
                     {
                         return false;
                     }
-                    else if (i == x)
+                    else if (i == x && !kings.inCheck(i, e, piece))
                     {
                         return true;
                     }
