@@ -10,6 +10,7 @@ public class Pawn : MonoBehaviour
     
     public bool CanMove(double position, GameObject piece) // This method checks if the move a knight is trying to make is a legal move
     {
+        Debug.Log("1");
         var (a, b) = cords.GetCord(position); // Sets the number of the square I am going to into cords
         
         Debug.Log("howdy");
@@ -59,8 +60,11 @@ public class Pawn : MonoBehaviour
             }
 }
             if (!piece.GetComponent<Piece>().isBlack){
+                Debug.Log("2");
                 Debug.Log(x == piece.GetComponent<Piece>().x && y == piece.GetComponent<Piece>().y + 1);
+                Debug.Log(x + " = " + piece.GetComponent<Piece>().x + " and " +  y + " = " + piece.GetComponent<Piece>().y);
             if (x == piece.GetComponent<Piece>().x && y == piece.GetComponent<Piece>().y + 1){
+                Debug.Log("4");
                 var(canMove, oppColor) = get.isOccupied(x, y, piece);
                 if (oppColor){
                     return false;

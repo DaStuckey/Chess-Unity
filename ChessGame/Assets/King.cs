@@ -7,17 +7,18 @@ public class King : MonoBehaviour
 {
     KingCheck kings = new KingCheck();
     public int checkCounter = 0;
-    Knight knight = new Knight();
+    //Knight knight = new Knight();
     CheckOcc get = new CheckOcc();
     GetCords cords = new GetCords();
-    Piece cordss = new Piece();
+    Piece cordss;
     public GameObject[] squared;
     
-   
-    public King()
-    {
-        squared = cordss.square;
-    }
+   private void Awake(){
+    GameObject gameObject = new GameObject("Piece");
+    cordss = gameObject.AddComponent<Piece>();
+   }
+
+    
 
     public bool hasMoved = false;
     public (bool, bool) CanMove(double position, GameObject piece)

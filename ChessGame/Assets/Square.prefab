@@ -115,3 +115,4 @@ MonoBehaviour:
   y: 0
   objects: {fileID: 2813254058877225183}
   position2: {x: 0, y: 0}
+  pieces: []

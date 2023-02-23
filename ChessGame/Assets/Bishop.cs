@@ -7,7 +7,9 @@ public class Bishop : MonoBehaviour
 {
     CheckOcc get = new CheckOcc();
     KingCheck kings = new KingCheck();
-    GetCords cords = new GetCords();
+    GetCords cords = new GetCords(); 
+
+   
     public bool CanMove(double position, GameObject piece)
     {
         

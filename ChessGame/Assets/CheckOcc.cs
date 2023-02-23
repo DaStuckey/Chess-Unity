@@ -5,13 +5,14 @@ using UnityEngine;
 public class CheckOcc 
 {
    
+   
     
     
-    bool hasRun = false;
    
     public Destroy d = new Destroy();
     public (bool, bool) isOccupied(double a, double b, GameObject piece)
     {
+         Debug.Log("3");
         GameObject[] prefabInstances = GameObject.FindGameObjectsWithTag("Piece");
 
         int i = 0;
@@ -25,6 +26,7 @@ public class CheckOcc
 
                 if (piece.GetComponent<Piece>().isBlack == script.GetComponent<Piece>().isBlack)
                 {
+                    Debug.Log("Hit");
                       return (false, false);
                 }
                 else

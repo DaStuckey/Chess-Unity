@@ -6,50 +6,56 @@ using UnityEngine;
 public class GetPosition : MonoBehaviour
 {
     
-    
-    
-    void Start()
-    {
-        Test();
-       
-    }
-    Piece newPiece = new Piece();
-    
+    Piece newPiece;
     public double x , y;
     public GameObject objects;
     public  Vector2 position2;
     Vector2[] list;
-    public static List<Vector2> prefabPositions = new List<Vector2>();
-    public static bool hasRun = false;
+    
+    public bool hasRun = false;
     public GameObject[] pieces;
-
-    public static void Test()
+   
+   
+    public List<Vector2> prefabPositions = new List<Vector2>();
+    
+   
+    public void Test()
     {
-      if (!hasRun)
-        {
+        
+        if (!hasRun){
+    //   GameObject gameObject = new GameObject("Piece");
+    // newPiece = gameObject.AddComponent<Piece>();
             
-            GameObject[] prefabInstance = GameObject.FindGameObjectsWithTag("Square");
-            //pieces = prefabInstance;
-            int i = 0;
-            foreach (GameObject prefab in prefabInstance)
-            {
+    //         GameObject[] prefabInstance = GameObject.FindGameObjectsWithTag("Square");
+    //         //pieces = prefabInstance;
+    //         int i = 0;
+    //         foreach (GameObject prefab in prefabInstance)
+    //         {
 
-                //Debug.Log(prefabInstance[i].GetComponent<GetPosition>().x);
-                prefabPositions.Add(prefab.transform.position);
-                i++;
+    //             //Debug.Log(prefab.transform.position);
+    //             prefabPositions.Add(prefab.transform.position);
+    //             i++;
                 
                 
-            }
-            
-            hasRun = true;
-        }
+    //         }
+            // Get the parent object that contains the squares
+    Transform squaresParent = GameObject.FindWithTag("Finish").transform;
+
+    // Loop through the children of the parent object in order
+    for (int i = 0; i < squaresParent.childCount; i++)
+    {
+        Transform child = squaresParent.GetChild(i);
+        // Add the position of the square to the list
+        prefabPositions.Add(child.position);
+    }
+           
         
     }
 
   
     
-
+    hasRun = true;
     
-
+}
 
 }

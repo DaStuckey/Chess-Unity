@@ -4,7 +4,7 @@ using UnityEngine;
 using System;
 public class Rook : MonoBehaviour
 {
-    King king = new King();
+    //King king = new King();
     KingCheck kings = new KingCheck();
     public bool hasMoved = false;
     CheckOcc get = new CheckOcc();

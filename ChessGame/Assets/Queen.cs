@@ -4,8 +4,18 @@ using UnityEngine;
 
 public class Queen : MonoBehaviour
 {
-    Bishop bishop = new Bishop();
-    Rook rook = new Rook();
+    Bishop bishop;
+    Rook rook;
+
+    private void Awake()
+{
+    GameObject gameObject = new GameObject("Bishop");
+    bishop = gameObject.AddComponent<Bishop>();
+
+    GameObject gameObjects = new GameObject("Rook");
+    rook = gameObject.AddComponent<Rook>();
+}
+
     public bool CanMove(double position, GameObject piece)
     {
         if (rook.CanMove(position, piece))
