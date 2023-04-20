@@ -5,7 +5,10 @@ using System;
 
 public class King : MonoBehaviour
 {
+    
+    
     KingCheck kings = new KingCheck();
+    Castling castle = new Castling();
     public int checkCounter = 0;
     //Knight knight = new Knight();
     CheckOcc get = new CheckOcc();
@@ -14,6 +17,7 @@ public class King : MonoBehaviour
     public GameObject[] squared;
     
    private void Awake(){
+    
     GameObject gameObject = new GameObject("Piece");
     cordss = gameObject.AddComponent<Piece>();
    }
@@ -60,64 +64,14 @@ public class King : MonoBehaviour
                 }
 
             }
-            // if (!piece.GetComponent<King>().hasMoved)
-            // {
-            //     GameObject[] pieces = GameObject.FindGameObjectsWithTag("Piece"); //GameObject piecer in pieces
-
-            //     for (int i = 0; i < pieces.Length; i++)
-            //     {
-            //         if (!pieces[i].GetComponent<Rook>().hasMoved)
-            //         {
-            //             if (piece.GetComponent<Piece>().x == 4 && piece.GetComponent<Piece>().y == 7)
-            //             {
-            //                 if (pieces[i].GetComponent<Rook>() != null && pieces[i].GetComponent<Piece>().isBlack)
-            //                 {
-            //                     if (pieces[i].GetComponent<Piece>().x == 7 && pieces[i].GetComponent<Piece>().y == 7)
-            //                     {
-            //                         GameObject temp = pieces[i];
-            //                         Debug.Log("Workesdfsdfsdfsfsddfsd");
-            //                         Debug.Log(pieces[i].GetComponent<Rook>() != null);
-            //                         Vector2 p = new Vector2(3.4f, -0.39f);
-            //                         Vector2 p1 = new Vector2(4f, -0.39f);
-            //                         temp.GetComponent<Piece>().isBlack = false;
-            //                         temp.transform.position = p;
-            //                         piece.transform.position = p1;
-            //                         cordss.SetCords();
-            //                         temp.GetComponent<Dragger>().position = p;
-            //                         temp = null;
-            //                         return (false, true);
-            //                     }
-
-            //                 }
-            //             }
-            //         }
-            //     }
-
-            // }
+            if (piece.GetComponent<Piece>().isBlack && x == 6 && y == 7 || piece.GetComponent<Piece>().isBlack && x == 2 && y == 7 
+                || !piece.GetComponent<Piece>().isBlack && x == 6 && y == 0 || !piece.GetComponent<Piece>().isBlack && x == 2 && y == 0 ){
+                    castle.CanCastle(x, y, piece);
+                }
+            
            
         
         return (false, false);
     }
-   /* public bool inChecks(GameObject piece)
-    {
-        piece.GetComponent<King>().checkCounter = 1;
-        double x = piece.GetComponent<Piece>().x;
-        double y = piece.GetComponent<Piece>().y;
-        double[,] combinations = { { x - 1, y + 2 }, { x + 1, y + 2 }, { x - 2, y + 1 }, { x + 2, y + 1 }, { x - 2, y - 1 }, { x + 2, y - 1 }, { x - 1, y - 2 }, { x + 1, y - 2 } };
-        
-        for (int i = 0; i < combinations.GetLength(0); i++)
-        {
-            var (c, g) = get.isOccupied(combinations[i, 0], combinations[i, 1], piece);
-            Debug.Log(c + " : " + g);
-            if (!c)
-            {
-                Debug.Log("222222222222222222" + i);
-                piece.GetComponent<King>().checkCounter = 0;
-                return true;
-            }
-        }
-
-        piece.GetComponent<King>().checkCounter = 0;
-        return false;
-    }*/
+   
 }
